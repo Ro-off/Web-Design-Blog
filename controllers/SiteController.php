@@ -61,7 +61,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $dataProvider = new \yii\data\ActiveDataProvider([
+            'query' => \app\models\Post::find(),
+        ]);
+    
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
@@ -125,4 +131,7 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    
+    
 }
