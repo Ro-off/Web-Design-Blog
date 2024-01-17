@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=WD_BLOG_DB',
-    'password' => 'password',
-    'charset' => 'utf8',
+    'dsn' => 'mysql:host=localhost;dbname=wd_blog_db',
+    'password' => 'user12',
+    'charset' => '121212aA',
 
     // Schema cache options (for production environment)
     //'enableSchemaCache' => true,
