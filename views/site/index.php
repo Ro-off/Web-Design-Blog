@@ -97,39 +97,47 @@ $this->params['breadcrumbs'][] = $this->title;
         padding: 1.25rem;
     }
 
-    </style>
+</style>
 <div class="post-index">
     
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= ListView::widget([
-        'dataProvider' => $dataProvider,
-        'itemView' => function ($model, $key, $index, $widget) {
-            return '<div class="card mb-4 shadow-sm">
-                        <img class="card-img-top" src="' . Yii::getAlias('@web') . '/' . $model->image . '" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">' . $model->title . '</h5>
-                            <p class="card-text">' . $model->content . '</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    ' . Html::a('View', ['post/view', 'id' => $model->id], ['class' => 'btn btn-sm btn-outline-secondary']) . '
-                                    ' . Html::a('Edit', ['update', 'id' => $model->id], ['class' => 'btn btn-sm btn-outline-secondary']) . '
-                                </div>
-                                <small class="text-muted">' . $model->created_at . '</small>
+    'dataProvider' => $dataProvider,
+    'itemView' => function ($model, $key, $index, $widget) {
+        $content = strlen($model->content) > 100 ? substr($model->content, 0, 100) . '...' : $model->content;
+        return '<div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="' . Yii::getAlias('@web') . '/' . $model->image . '" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">' . $model->title . '</h5>
+                        <p class="card-text">' . $content . '</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                ' . Html::a('View', ['post/view', 'id' => $model->id], ['class' => 'btn btn-sm btn-outline-secondary']) . '
+                                ' . Html::a('Edit', ['post/update', 'id' => $model->id], ['class' => 'btn btn-sm btn-outline-secondary']) . '
+                                ' . Html::a('Delete', ['post/delete', 'id' => $model->id], [
+                                    'class' => 'btn btn-sm btn-outline-danger',
+                                    'data' => [
+                                        'confirm' => 'Are you sure you want to delete this item?',
+                                        'method' => 'post',
+                                    ],
+                                ]) . '
                             </div>
+                            <small class="text-muted">' . $model->created_at . '</small>
                         </div>
-                    </div>';
-        },
-        'summary' => '',
-        'options' => [
-            'tag' => 'div',
-            'class' => 'row',
-        ],
-        'itemOptions' => [
-            'tag' => 'div',
-            'class' => 'col-md-4',
-        ],
-    ]); ?>
+                    </div>
+                </div>';
+    },
+    'summary' => '',
+    'options' => [
+        'tag' => 'div',
+        'class' => 'row',
+    ],
+    'itemOptions' => [
+        'tag' => 'div',
+        'class' => 'col-md-4',
+    ],
+]); ?>
 
     <?= Html::a('Create Post', ['post/create'], ['class' => 'btn btn-success']);?>
 
