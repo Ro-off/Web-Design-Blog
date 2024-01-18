@@ -11,7 +11,7 @@ class Tag extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'tag'; // Adjust this to match your actual table name
+        return 'tag';
     }
 
     /**
@@ -36,5 +36,4 @@ class Tag extends ActiveRecord
         ];
     }
 
-    // Define any relations here
 }
