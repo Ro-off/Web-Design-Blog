@@ -45,12 +45,14 @@ class PostController extends Controller
     ]);
 }
 
-    public function actionView($id)
+public function actionView($id)
 {
     $model = $this->findModel($id);
+    $commentModel = new \app\models\Comment(); 
 
     return $this->render('view', [
         'model' => $model,
+        'commentModel' => $commentModel,
     ]);
 }
 
