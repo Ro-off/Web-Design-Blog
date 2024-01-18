@@ -65,6 +65,26 @@ public function actionIndex()
     ]);
 }
 
+public function actionUpdate($id)
+{
+    $model = $this->findModel($id);
+
+    if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        return $this->redirect(['view', 'id' => $model->id]);
+    }
+
+    return $this->render('update', [
+        'model' => $model,
+    ]);
+}
+
+public function actionDelete($id)
+{
+    $this->findModel($id)->delete();
+
+    return $this->redirect(['index']);
+}
+
 protected function findModel($id)
 {
     if (($model = Post::findOne($id)) !== null) {
@@ -73,4 +93,6 @@ protected function findModel($id)
 
     throw new NotFoundHttpException('The requested page does not exist.');
 }
+
+
 } 
